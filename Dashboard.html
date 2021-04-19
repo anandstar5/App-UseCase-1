@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+
+<body> 
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Dashboard</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="Login.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="form">
+        <div class="cotainer">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Product Details</div>
+                        <div class="card-body">
+
+                            <div class="form-group row">
+                                <label for="productname" class="col-md-4 col-form-label text-md-right">Product
+                                    Name</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="productname" name="productname" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="value" class="col-md-4 col-form-label text-md-right">Product Value</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="value" name="value" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 offset-md-4">
+                                <button type="button" class="btn btn-primary" onclick="Add()">Add</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Product Value</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyProduct">
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>
+
+<script>
+    function Add() {
+        var table = document.getElementById("tbodyProduct");
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var count = table.rows.length;
+        cell1.innerHTML = document.getElementById("productname").value;
+        cell2.innerHTML = document.getElementById("value").value;
+        cell3.innerHTML = "<button id='btn" + count + "' type='button' onclick='Delete(this)'>Delete</button>";
+    }
+    function Delete(elem) {
+        var rowid = document.getElementById(elem.id).closest('tr').rowIndex;
+        document.getElementById("tbodyProduct").deleteRow(rowid - 1);
+    }
+
+</script>
